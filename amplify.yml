@@ -1,0 +1,18 @@
+version: 0.1
+frontend:
+  phases:
+    build:
+      commands:
+        - |
+          if [[ "${AWS_BRANCH}" == "master" ]]; then
+            hugo
+          else
+            # Build draft pages in non-production
+            hugo --buildDrafts
+          fi
+  artifacts:
+    baseDirectory: public
+    files:
+      - '**/*'
+  cache:
+    paths: []
